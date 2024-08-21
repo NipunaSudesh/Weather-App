@@ -24,7 +24,8 @@ export const StateContextProvider = ({ children }) => {
       );
       console.log(response.data);
       setData(response.data);
-      setLocation(`${response.data.name}, ${response.data.sys.country}`);
+      setLocation(`${response.data.name},
+         ${response.data.sys.country}`);
       setWeather(response.data.main.temp);
     } catch (err) {
       setError('City not found. Please try again.');
