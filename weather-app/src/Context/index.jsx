@@ -1,51 +1,56 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-
 
 // Create StateContext
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const [weather, setWeather] = useState(null);
-  const [data, setData] = useState({});
-  const [place, setPlace] = useState('mawanella');
   const [location, setLocation] = useState('');
   const [error, setError] = useState('');
+  const [place, setPlace] = useState('mawanella');
 
-  // API Key
-  //const apiKey = "a05f2a7fedaf53e41750c4bb321d7952";
+  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
   // Fetch weather data
   const fetchWeather = async (e) => {
     if (e) e.preventDefault();
     setError('');
     try {
-      const response = await axios.get(
+      const { data } = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${place}&units=metric&appid=${apiKey}`
       );
-      console.log(response.data);
-      setData(response.data);
-      setLocation(`${response.data.name},
-         ${response.data.sys.country}`);
-      setWeather(response.data.main.temp);
+
+      const { main, wind, weather: weatherArray, name, sys } = data;
+      const { temp, humidity } = main;
+      const { speed } = wind;
+      const [weatherInfo] = weatherArray;
+      const { main: conditions, description } = weatherInfo;
+
+      setWeather({
+        temperature: temp,
+        humidity,
+        windspeed: speed,
+        conditions,
+        description,
+      });
+
+      setLocation(`${name}, ${sys.country}`);
     } catch (err) {
       setError('City not found. Please try again.');
       console.error(err);
     }
   };
 
+  // Fetch weather whenever the place changes
   useEffect(() => {
     fetchWeather();
   }, [place]);
-
-
 
   return (
     <StateContext.Provider
       value={{
         weather,
-        data,
         location,
         place,
         error,

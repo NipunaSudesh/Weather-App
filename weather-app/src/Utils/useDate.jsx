@@ -7,11 +7,9 @@ export const useDate = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setToday(new Date());
-    }, 60 * 1000); 
+    }, 1000);
 
-    return () => {
-      clearInterval(timer);
-    };
+    return () => clearInterval(timer);
   }, []);
 
   const day = today.toLocaleDateString(locale, { weekday: 'long' });
@@ -26,8 +24,5 @@ export const useDate = () => {
     hour12: true,
   });
 
-  return {
-    date,
-    time,
-  };
+  return { date, time };
 };

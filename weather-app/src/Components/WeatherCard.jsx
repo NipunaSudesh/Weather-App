@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDate } from '../Utils/useDate';
 import { fogPng, rainPng, sunnPng, sunRainPng, thunderPng,cloudpng,snowpng ,windpng} from '../assets/index';
 import '../index.css';
@@ -32,17 +32,17 @@ export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex
   }, [iconString]);
 
   return (
-    <div className="w-[22rem] min-w-[22rem] h-[30rem] glassCard p-4">
-      <div className='flex w-full justify-center items-center mt-12 gap-4 mb-4'>
+    <div className="w-[26rem] min-w-[26rem] h-[35rem] glassCard p-4">
+      <div className='flex w-full justify-center items-center mt-2 gap-4 mb-4'>
       <img src={icon} alt='weather-icon'/>
       <p className='font-bold text-5xl flex justify-center items-center'>{temperature} &deg;C</p>
       </div>
-      <div className='font-bold text-xl text-center'>
+      <div className='font-bold text-5xl text-center'>
           {place}
       </div>
       <div className='w-full flex justify-center items-center mt-4'>
           <p className='flex-1 text-center p-2'>{new Date().toDateString()}</p>
-          <p className='flex-1 text-center p-2'>{}time</p>
+          <p className='flex-1 text-center p-2'>{time}</p>
       </div>
       <div className='w-full flex justify-center items-centermt-4 gap-5'>
         <p className='flex-1 text-center p-2 font-bold bg-blue-600 shadow rounded-lg'>Wind Speed <span className='font-normal'>{windspeed}</span> </p>
@@ -51,7 +51,7 @@ export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex
       <div className='w-full flex items-center justify-center mt-4'>
           <p className='font-semibold text-xl'>Heat Index</p>
           <p className=' text-xl'>{
-              heatIndex ? heatIndex :'N/A'
+              heatIndex ? heatIndex :' N/A'
             }</p>
       </div>
       <hr className='bg-slate-600'/>
