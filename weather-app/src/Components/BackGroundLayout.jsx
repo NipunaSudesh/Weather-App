@@ -34,7 +34,7 @@ export const BackGroundLayout = () => {
 
   return (
     <div>
-      <img src={image} alt='weatherImage' className='h-screen w-full fixed left-0 top-0 -z-[10]' />
+      <img src={image} alt='weatherImage' className='h-screen w-full fixed left-0 top-0 -z-[10] ' />
     </div>
   );
 };

@@ -11,6 +11,9 @@ import rainPng from './images/rainpng.png';
 import sunnPng from './images/sunnyPng.png';
 import sunRainPng from './images/sunRain.png';
 import thunderPng from './images/thunder.png';
+import cloudpng from './images/cloud.png';
+import snowpng from './images/snow.png';
+import windpng from './images/wind.png';
 
 
 export{
@@ -26,6 +29,10 @@ export{
     rainPng,
     sunnPng,
     sunRainPng,
-    thunderPng
+    thunderPng,
+    snowpng,
+    cloudpng,
+    windpng
+
 
 }
