@@ -10,7 +10,7 @@ export const NavBar = () => {
   return (
     
     <nav className='w-full p-3 flex justify-between items-center'>
-      <h1 className='font-bold tracking-wide text-3xl text-black'>Weather App</h1>
+      <h1 className='font-bold tracking-wide text-3xl '>Weather App</h1>
       <div className='bg-white w-[15rem] overflow-hidden shadow-2xl rounded flex item-center p-2 gap-2'>
           <CiSearch className='text-black w-8 h-8'/>
           <input type='text' 
