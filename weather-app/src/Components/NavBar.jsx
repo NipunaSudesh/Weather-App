@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { CiSearch } from "react-icons/ci";
+import { useStateContext } from '../Context';
 
 export const NavBar = () => {
     const[input,setInput] =useState('');
+    const {weather} =useStateContext();
+    console.log(weather)
 
   return (
     

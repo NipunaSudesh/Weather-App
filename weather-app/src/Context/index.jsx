@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+
 
 // Create StateContext
 const StateContext = createContext();
@@ -12,7 +14,7 @@ export const StateContextProvider = ({ children }) => {
   const [error, setError] = useState('');
 
   // API Key
-  const apiKey = "a05f2a7fedaf53e41750c4bb321d7952";
+  //const apiKey = "a05f2a7fedaf53e41750c4bb321d7952";
 
   // Fetch weather data
   const fetchWeather = async (e) => {
