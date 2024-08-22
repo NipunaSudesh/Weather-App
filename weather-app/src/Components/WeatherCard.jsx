@@ -49,10 +49,10 @@ export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex
         <p className='flex-1 text-center p-2 font-bold bg-green-600 shadow rounded-lg'>Humidity <span className='font-normal'>{humidity}</span></p>
       </div>
       <div className='w-full flex items-center justify-center mt-4'>
-          <p className='font-semibold text-xl'>Heat Index</p>
-          <p className=' text-xl'>{
-              heatIndex ? heatIndex :' N/A'
-            }</p>
+          <p className='font-semibold text-xl'>Heat Index : </p>
+          <p className=' text-xl'>
+              {heatIndex ? heatIndex.toFixed(1) : 'N/A'}
+            </p>
       </div>
       <hr className='bg-slate-600'/>
       <div className='w-full p-4 flex justify-center items-center text-3xl font-semibold'>
