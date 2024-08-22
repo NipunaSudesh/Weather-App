@@ -4,7 +4,7 @@ import { useStateContext } from '../Context';
 import { MiniCard } from './MiniCard';
 
 export const Home = () => {
-  const { weather, location, values, place, error } = useStateContext();
+  const { weather, location, values, place, error ,forecast} = useStateContext();
 
   return (
     <div className='w-full flex flex-wrap gap-8 py-4 px-[10%] items-center justify-center'>

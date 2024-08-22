@@ -32,9 +32,9 @@ export const WeatherCard = ({ temperature, windspeed, humidity, place, heatIndex
   }, [iconString]);
 
   return (
-    <div className="w-[26rem] min-w-[26rem] h-[35rem] glassCard p-4">
-      <div className='flex w-full justify-center items-center mt-2 gap-4 mb-4'>
-      <img src={icon} alt='weather-icon'/>
+    <div className="w-[26rem] min-w-[26rem] h-[33rem] glassCard p-4">
+      <div className='flex w-full justify-center items-center mt-12 gap-4 mb-4'>
+      <img src={icon} alt='weather-icon' className='w-[12rem]'/>
       <p className='font-bold text-5xl flex justify-center items-center'>{temperature} &deg;C</p>
       </div>
       <div className='font-bold text-5xl text-center'>

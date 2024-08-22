@@ -7,34 +7,33 @@ export const BackGroundLayout = () => {
   const [image, setImage] = useState(clear);
 
   useEffect(() => {
-    if (weather && weather.weather && weather.weather[0].description) {
-      const imageString = weather.weather[0].description.toLowerCase();
+    if (weather) {
+      const description = weather.description.toLowerCase();
 
-      if (imageString.includes('clear')) {
+      if (description.includes('clear')) {
         setImage(clear);
-      } else if (imageString.includes('rain') || imageString.includes('shower')) {
+      } else if (description.includes('rain')) {
         setImage(rainy);
-      } else if (imageString.includes('snow')) {
+      } else if (description.includes('snow')) {
         setImage(snow);
-      } else if (imageString.includes('thunder') || imageString.includes('storm')) {
+      } else if (description.includes('storm')) {
         setImage(stormy2);
-      } else if (imageString.includes('sun')) {
+      } else if (description.includes('sun')) {
         setImage(sunny);
-      } else if (imageString.includes('cloud')) {
+      } else if (description.includes('cloud')) {
         setImage(cloudy);
-      } else if (imageString.includes('fog')) {
+      } else if (description.includes('fog')) {
         setImage(fog);
-      } else if (imageString.includes('wind')) {
+      } else if (description.includes('wind')) {
         setImage(wind);
-      } else {
-        setImage(clear);
       }
     }
   }, [weather]);
 
+
   return (
     <div>
-      <img src={image} alt='weatherImage' className='h-screen w-full fixed left-0 top-0 -z-[10] ' />
+      <img src={image} alt='weatherImage' className='h-screen w-full fixed left-0 top-0 -z-[10]' />
     </div>
   );
 };
