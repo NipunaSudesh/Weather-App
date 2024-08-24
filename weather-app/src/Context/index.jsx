@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -7,6 +8,8 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
   const [weather, setWeather] = useState(null);
   const [location, setLocation] = useState('');
+
+  const [hourlyForecast, setHourlyForecast] = useState([]);
   const [error, setError] = useState('');
   const [place, setPlace] = useState('mawanella');
 
@@ -24,16 +27,17 @@ export const StateContextProvider = ({ children }) => {
       + 0.00072546 * T * H * H - 0.000003582 * T * T * H * H;
   };
 
-  // Fetch weather data
+  // Fetch current weather data
   const fetchWeather = async (e) => {
     if (e) e.preventDefault();
     setError('');
     try {
+      // Fetch current weather
       const { data } = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${place}&units=metric&appid=${apiKey}`
       );
 
-      const { main, wind, weather: weatherArray, name, sys } = data;
+      const { main, wind, weather: weatherArray, name, sys, coord } = data;
       const { temp, humidity } = main;
       const { speed } = wind;
       const [weatherInfo] = weatherArray;
@@ -47,17 +51,43 @@ export const StateContextProvider = ({ children }) => {
         windspeed: speed,
         conditions,
         description,
-        heatIndex,  // Add heatIndex to the weather state
+        heatIndex,
       });
 
       setLocation(`${name}, ${sys.country}`);
+
+      // Fetch hourly forecast
+      await fetchHourlyForecast(coord.lat, coord.lon);
+
     } catch (err) {
       setError('City not found. Please try again.');
       console.error(err);
     }
   };
 
-  // Fetch weather whenever the place changes
+  // Fetch hourly forecast for the next 4 days
+  const fetchHourlyForecast = async (lat, lon) => {
+    try {
+      const { data } = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
+      );
+
+      // Extract hourly forecast data
+      const hourlyForecast = data.list.map(item => ({
+        time: item.dt * 1000, // Convert UNIX timestamp to milliseconds
+        temp: (item.main.temp - 273.15).toFixed(1),
+        conditions: item.weather[0].main,
+        description: item.weather[0].description,
+      }));
+
+      setHourlyForecast(hourlyForecast); // Set the hourly forecast state
+        console.log('hourlyForecast',hourlyForecast)
+    } catch (error) {
+      console.error('Error fetching hourly forecast data:', error);
+    }
+  };
+
+
   useEffect(() => {
     fetchWeather();
   }, [place]);
@@ -69,6 +99,7 @@ export const StateContextProvider = ({ children }) => {
         location,
         place,
         error,
+        hourlyForecast,
         setPlace,
         fetchWeather,
       }}
@@ -78,5 +109,4 @@ export const StateContextProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use the context
 export const useStateContext = () => useContext(StateContext);
