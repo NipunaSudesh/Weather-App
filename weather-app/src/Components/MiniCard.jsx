@@ -23,23 +23,23 @@ export const MiniCard = ({ iconString, time, temp,description }) => {
       } else if (iconString.toLowerCase().includes('wind')) {
         setIcon(windpng);
       } else {
-        setIcon(sunRainPng); // Default icon if none of the conditions match
+        setIcon(sunRainPng); 
       }
     }
   }, [iconString]);
 
   return (
-    <div className='glassCard w-[10rem] h-[10rem] p-4 flex flex-col'>
+    <div className='glassCard w-[12rem] h-[13rem] p-4 flex flex-col'>
       <p className='text-center'>
         {new Date(time).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })} <br />
         {new Date(time).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
       </p>
       <hr />
       <div className='w-full flex items-center justify-center flex-1'>
-        <img src={icon} alt='weather' className='w-[4rem] h-[4rem]' />
+        <img src={icon} alt='weather' className='w-[6rem] h-[5rem]' />
       </div>
-      <p className='text-center font-bold'>{temp}&deg;C</p> 
-      <p className='text-center font-bold'>{description}</p>
+      <p className='text-center font-bold text-red-600'>{temp}&deg;C</p> 
+      <p className='text-center font-bold text-xl text-gray-200'>{description}</p>
     </div>
   );
 };
