@@ -8,7 +8,7 @@ export const Home = () => {
   const filteredData = hourlyForecast.filter((_, index) => index % 5 === 0);
 
   return (
-    <div className='w-full mt-20 flex flex-wrap gap-4 py-4 px-4 md:px-8 lg:px-12 xl:px-[12%] items-center justify-center'>
+    <div className='w-full mt-20 flex flex-col lg:flex-row gap-4 py-4 px-4 md:px-8 lg:px-12 xl:px-[12%] items-center justify-center '>
       
       {!weather && !error && <p>Loading...</p>}
       {error && <p className='text-red-500'>{error}</p>}
